@@ -75,13 +75,13 @@ namespace VietLish.Controllers
                             role = false,
                         };
                         db.Accounts.Add(a);
-                        Score s = new Score
-                        {
-                            account_id = "ID" + (totalStudent + 1),
-                            total_score = 0,
-                        };
+                        //Score s = new Score
+                       // {
+                          //  account_id = "ID" + (totalStudent + 1),
+                           // total_score = 0,
+                       // };
                         db.Accounts.Add(a);
-                        db.Scores.Add(s);
+                        //db.Scores.Add(s);
                         db.SaveChanges();
                         ViewBag.Message = "Login Successfully!! ";
                         return View("Login");

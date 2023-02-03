@@ -146,6 +146,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EF\Account.cs" />
+    <Compile Include="Models\EF\VietLishDbContext.cs" />
+    <Compile Include="Models\EF\Module.cs" />
+    <Compile Include="Models\EF\Question.cs" />
+    <Compile Include="Models\EF\ScoreOfTest.cs" />
+    <Compile Include="Models\EF\Sentence.cs" />
+    <Compile Include="Models\EF\Study.cs" />
+    <Compile Include="Models\EF\sysdiagram.cs" />
+    <Compile Include="Models\EF\Test.cs" />
+    <Compile Include="Models\EF\Vocabulary.cs" />
     <Compile Include="Models\ViewModel\AuthViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
