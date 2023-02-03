@@ -8,16 +8,10 @@ CREATE TABLE Account
 	dob datetime NULL,
 	gender bit NULL,
 	[role] bit NOT NULL,
-	[status] bit NULL, -- test start or stop testing
-	[date_test] datetime NULL,	
+		
 )
 
-CREATE TABLE Part
-(
-	part_id int identity(1,1) primary key,
-	[name_part] nvarchar(50) NOT NULL,
-	[image] nvarchar(max) NULL
-)
+
 
 -- Test--
 CREATE TABLE Test
@@ -33,17 +27,9 @@ CREATE TABLE Test
 	num_p5 int NOT NULL,
 	num_p6 int NOT NULL,
 	num_p7 int NOT NULL,
-	total_tester int NOT NULL,
-	level_of_test nvarchar(max) NULL,
+	
 )
 
---Level--
-CREATE TABLE [Level]
-(
-	level_id int identity(1,1) primary key,
-	level_name nvarchar(20),
-	[image] nvarchar(max),
-)
 
 
 CREATE TABLE Question
@@ -55,9 +41,7 @@ CREATE TABLE Question
 	C nvarchar(max) null,
 	D nvarchar(max) null,
 	answer nvarchar(5) not null,
-	level_id int foreign key (level_id) references [Level](level_id) NOT NULL, 
-	test_id int foreign key (test_id) references test(test_id) NULL,
-	part_id int foreign key (part_id) references Part(part_id) NULL,
+	module_id int foreign key (module_id) references Module(module_id) NULL,
 )
 
  -- module study--
@@ -79,8 +63,7 @@ CREATE TABLE Vocabulary
 	[synonym] nvarchar(100) NULL,
 	antonym nvarchar(100) NULL,
 	[image] varchar(max) NULL,
-	module_id int foreign key (module_id) references module(module_id),
-	test_id int foreign key (test_id) references test(test_id) NULL,
+	module_id int foreign key (module_id) references module(module_id) NULL,
 )
 CREATE TABLE Sentence
 (
@@ -88,36 +71,25 @@ CREATE TABLE Sentence
 	sentence nvarchar(max) NOT NULL,
 	means nvarchar(max) NOT NULL,
 	[image] varchar(max) NULL,
-	module_id int foreign key (module_id) references module(module_id),
-	test_id int foreign key (test_id) references test(test_id) NULL,
-)
-
-CREATE TABLE Score
-(
-	score_id int identity(1,1) primary key,
-	listening_score int,
-	reading_score int,
-	total_score int,
-	account_id nvarchar(30) foreign key (account_id) references Account(account_id),
+	module_id int foreign key (module_id) references module(module_id) NULL,
 )
 
 
-CREATE TABLE QuestionOfTest
-(
-	question_of_test_id int primary key NOT NULL,
-	question_id int foreign key (question_id) references Question(question_id) NOT NULL,
-	test_id int foreign key (test_id) references Test(test_id) NOT NULL,
-	number_of_ques int NULL,
-	test_day datetime NULL,
-)
 
 CREATE TABLE ScoreOfTest
 (
 	score_test_id int identity(1,1) primary key NOT NULL,
 	listening_score int NOT NULL,
-	reading_score int NOT NULL,
 	total_score int NOT NULL,
 	test_id int foreign key (test_id) references Test(test_id) NOT NULL,
 	account_id nvarchar(30) foreign key (account_id) references Account(account_id),
-	date_created datetime NULL,
+	date_of_test datetime NULL,
+)
+
+CREATE TABLE Studies
+(
+	studies_id int identity(1,1) primary key NOT NULL,
+	status_test nvarchar(max) NOT NULL,
+	module_id int foreign key (module_id) references Module(module_id) NOT NULL,
+	account_id nvarchar(30) foreign key (account_id) references Account(account_id),
 )

@@ -68,7 +68,8 @@ namespace VietLish.Controllers
                         var totalStudent = (from row in db.Accounts select row).Count();
                         Account a = new Account
                         {
-                            account_id = "Ms0" + (totalStudent + 1),
+                            account_id = "ID" + (totalStudent + 1),
+                            full_name =m.Account.full_name,
                             username = m.Account.username,
                             password = m.Account.password,
                             role = false,
@@ -76,7 +77,7 @@ namespace VietLish.Controllers
                         db.Accounts.Add(a);
                         Score s = new Score
                         {
-                            account_id = "Ms0" + (totalStudent + 1),
+                            account_id = "ID" + (totalStudent + 1),
                             total_score = 0,
                         };
                         db.Accounts.Add(a);

@@ -19,6 +19,12 @@
         </div>
         <div class="auth-form__form">
             <div class="auth-form__group">
+
+                @Html.TextBoxFor(m => m.Account.full_name, new { @class = "auth-form-input", @placeholder = "Full Name", @autofocus = "autofocus" })
+                <span class="error-message">@Html.ValidationMessageFor(m => m.Account.full_name)</span>
+            </div>
+
+            <div class="auth-form__group">
                 @Html.TextBoxFor(m => m.Account.username, new { @class = "auth-form-input", @placeholder = "Username", @autofocus = "autofocus" })
                 <span class="error-message">@Html.ValidationMessageFor(m => m.Account.username)</span>
             </div>
