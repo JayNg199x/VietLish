@@ -1,0 +1,44 @@
+﻿@model List<ELearning.Models.Vocabulary>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .row-padding {
+        display: inline-block;
+        margin-top: 20px;
+        border: 1px solid rgb(37, 150, 190);
+        font-size: 20px;
+        border-radius: 10px;
+        width: 70%;
+    }
+
+    .column {
+        float: left;
+        width: 20%;
+        padding: 10px;
+        height: 200px;
+        margin-left: 5%;
+    }
+</style>
+<div class="container">
+    @foreach (Vocabulary i in Model)
+    {
+        <div class="row row-padding">
+            <div class="col">
+                <div class="row">
+                    <div class="column">
+                        <img src="@i.Image" alt="Girl in a jacket" width="120" height="120">
+                        <p>@i.Word</p>
+                    </div>
+                    <div class="column" style="width: 60%;">
+                        <p>@i.Pronunciation</p>
+                        <p>@i.Means</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    }
+</div>

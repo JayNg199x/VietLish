@@ -51,6 +51,10 @@ CREATE TABLE Module
 	topic_name varchar(100),
 	[image] nvarchar(max),
 )
+insert into Module values ('Animal',N'animal.jpg')
+insert into Module values ('Color',N'color.jpg')
+
+
 
 -- vocabulary---
 CREATE TABLE Vocabulary
@@ -63,7 +67,7 @@ CREATE TABLE Vocabulary
 	[synonym] nvarchar(100) NULL,
 	antonym nvarchar(100) NULL,
 	[image] varchar(max) NULL,
-	module_id int foreign key (module_id) references module(module_id) NULL,
+	module_id int foreign key (module_id) references Module(module_id),
 )
 CREATE TABLE Sentence
 (
