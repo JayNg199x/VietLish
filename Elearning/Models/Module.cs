@@ -11,6 +11,7 @@ namespace ELearning.Models
         {
             Sentences = new HashSet<Sentence>();
             VocabInModule = new HashSet<Vocabulary>();
+            Tests = new HashSet<Test>();
         }
 
         public int Id { get; set; }
@@ -23,5 +24,6 @@ namespace ELearning.Models
         public virtual Part Part { get; set; }
         public virtual ICollection<Sentence> Sentences { get; set; }
         public virtual ICollection<Vocabulary> VocabInModule { get; set; }
+        public virtual ICollection<Test> Tests { get; set; }
     }
 }

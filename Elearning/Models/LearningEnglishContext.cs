@@ -22,7 +22,9 @@ namespace ELearning.Models
         public virtual DbSet<Level> Levels { get; set; }
         public virtual DbSet<Part> Parts { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Sentence> SentenceS { get; set; }
+        public virtual DbSet<Sentence> Sentences { get; set; }
+        public virtual DbSet<Test> Tests { get; set; }
+
         public virtual DbSet<Vocabulary> VocabInModule { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -103,7 +105,7 @@ namespace ELearning.Models
                     .HasConstraintName("FK__Module__level_id__403A8C7D");
 
                 entity.HasOne(d => d.Part)
-                    .WithMany(p => p.ModuleInPart)
+                    .WithMany(p => p.Modules)
                     .HasForeignKey(d => d.PartId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Module__part_id__3F466844");
@@ -163,7 +165,7 @@ namespace ELearning.Models
                     .IsRequired()
                     .HasColumnName("level");
 
-                entity.HasOne(d => d.ModuleInSentence)
+                entity.HasOne(d => d.Module)
                     .WithMany(p => p.Sentences)
                     .HasForeignKey(d => d.ModuleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -182,12 +184,41 @@ namespace ELearning.Models
 
                 entity.Property(e => e.ModuleId).HasColumnName("module_id");
 
-                entity.HasOne(d => d.ModuleInVocab)
+                entity.HasOne(d => d.Module)
                     .WithMany(p => p.VocabInModule)
                     .HasForeignKey(d => d.ModuleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__VocabInLe__lesso__4316F928");
             });
+            modelBuilder.Entity<Test>(entity =>
+            {
+                entity.ToTable("Test");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.AnswerA).IsRequired();
+
+                entity.Property(e => e.AnswerB).IsRequired();
+
+                entity.Property(e => e.AnswerC).IsRequired();
+
+                entity.Property(e => e.AnswerD).IsRequired();
+
+                entity.Property(e => e.Correct).IsRequired();
+
+                entity.Property(e => e.Question).IsRequired();
+
+                entity.Property(e => e.ModuleId).HasColumnName("module_id");
+
+                entity.HasOne(d => d.Module)
+                    .WithMany(p => p.Tests)
+                    .HasForeignKey(d => d.ModuleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("[FK__Test__module_id__36B12243]");
+
+            });
+
+
 
             OnModelCreatingPartial(modelBuilder);
         }

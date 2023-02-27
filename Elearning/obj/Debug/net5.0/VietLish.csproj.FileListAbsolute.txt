@@ -159,3 +159,4 @@ C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\VietLish.dll
 C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\ref\VietLish.dll
 C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\VietLish.pdb
 C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\VietLish.genruntimeconfig.cache
+C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\Razor\Views\Home\TestModule.cshtml.g.cs

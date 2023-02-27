@@ -9,13 +9,13 @@ namespace ELearning.Models
     {
         public Part()
         {
-            ModuleInPart = new HashSet<Module>();
+            Modules = new HashSet<Module>();
         }
 
         public int Id { get; set; }
         public string PartName { get; set; }
         public string Image { get; set; }
-        public virtual ICollection<Module> ModuleInPart { get; set; }
+        public virtual ICollection<Module> Modules { get; set; }
 
     }
 }

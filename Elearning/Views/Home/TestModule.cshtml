@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ELearning.Models.Test>
+
+    @{
+    ViewData["Title"] = "Home Page";
+    var i = 1;
+    }
+
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-12">
+                <form action="/Home/Mark" method="post">
+                    @foreach (Test j in Model)
+                    {
+
+                    <p class="subject">@i .@j.Question</p>
+                    <input type="hidden" name="marks.Id" id="circle1" value="@j.Id">
+                    <div>
+                        <label for="one" class="box first">
+                            <div class="course">
+                                <input type="radio" name="tests.AnswerA" id="circle1" value="@j.AnswerA">
+                                <span class="fw-bold">@j.AnswerA</span>
+                            </div>
+                        </label>
+                        <br />
+                        <label for="two" class="box second">
+                            <div class="course">
+                                <input type="radio" name="tests.AnswerB" id="circle2" value="@j.AnswerB">
+                                <span class="fw-bold">@j.AnswerB</span>
+                            </div>
+                        </label>
+                        <br />
+                        <label for="three" class="box third">
+                            <div class="course">
+                                <input type="radio" name="tests.AnswerC" id="circle3" value="@j.AnswerC">
+                                <span class="fw-bold">@j.AnswerC</span>
+                            </div>
+                        </label>
+                        <br />
+                        <label for="four" class="box forth">
+                            <div class="course">
+                                <input type="radio" name="tests.AnswerD" id="circle4" value="@j.AnswerD">
+                                <span class="fw-bold">@j.AnswerD</span>
+                            </div>
+                        </label>
+                    </div>
+                    i++;
+                    }
+                    <button type="submit" class="btn btn-danger">Submit</button>
+                </form>

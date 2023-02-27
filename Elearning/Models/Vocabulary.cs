@@ -16,6 +16,6 @@ namespace ELearning.Models
 
 
 
-        public virtual Module ModuleInVocab { get; set; }
+        public virtual Module Module { get; set; }
     }
 }

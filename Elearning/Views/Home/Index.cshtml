@@ -25,22 +25,34 @@
     }
 </style>
 <div class="container">
-    @foreach (Level i in Model)
-    {
-        <div class="row row-padding">
-            <div class="col">
-                <div class="row">
-                    <div class="column">
-                        <img src="@i.Image" alt="Girl in a jacket" width="120" height="120">
-                        <p>@i.Level1</p>
-                        <a href="/Home/EnrollLevel/@i.Id" class="btn btn-primary">Learning</a>
-                    </div>
-                    <div class="column" style="width: 60%;">
-                        <p>@i.Description</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-    }
+    <form class="navbar-form navbar-right">
+        <input type ="text" class="form-control" placeholder="Search...">   
+    </form>
+    <table class=" table">
+        <tbody>
+            @foreach (Level j in Model)
+            {
+                <tr>
+                    <td class="nr td-actions text-center"></td>
+                    <td><img src="@j.Image" width="120" height="120"></td>
+                    <td>@j.Level1</td>
+                    <td>@j.Description</td>
+                    <td><a href="/Home/EnrollLevel/@j.Id" class=" btn btn-primary">Learning</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
+<script type="text/javascript">
+    var a = document.getElementsByClassName("nr");
+    for (var i = 0; i < a.length; i++) {
+        a[i].innerHTML = (i + 1);
+    }
+</script>
+    
+
+
+
+
+
+ 
