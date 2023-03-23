@@ -1,9 +1,29 @@
-﻿#nullable disable
+﻿
+using System;
+using System.Collections.Concurrent;
+    #nullable disable
 
 namespace ELearning.Models
 {
     public partial class Account
     {
+        public Account()
+        {
+        }
+        public Account (string fullName, bool gender, string email, string contactNo, 
+            string userName, string password, int roldeId, bool? status)
+        {
+            FullName = fullName;
+            Gender = gender;
+            Email = email;
+            ContactNo = contactNo;
+            UserName = userName;
+            Password = password;
+            RoleId = roldeId;
+            Status = status;
+
+        }
+
         public int Id { get; set; }
         public string FullName { get; set; }
         public bool Gender { get; set; }

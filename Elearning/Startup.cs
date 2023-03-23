@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +29,20 @@ namespace ELearning
             services.AddControllersWithViews();
             services.AddSession();
             services.AddHttpContextAccessor();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+            })
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Home/Signingoogle";
+                }).AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
+                {
+                    options.ClientId = "499201243810-eh668rl506v8nd7c515ptfpne21d2ee1.apps.googleusercontent.com";
+                    options.ClientSecret = "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";
+                    options.ClaimActions.MapJsonKey("urn:google:picture", "picture", "url");
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,11 +60,12 @@ namespace ELearning
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseCookiePolicy();
+            app.UseAuthentication();
             app.UseRouting();
-            app.UseSession();
-            app.UseAuthorization();
 
+            app.UseAuthorization();
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -57,3 +75,4 @@ namespace ELearning
         }
     }
 }
+

@@ -160,3 +160,7 @@ C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\ref\VietLish.dll
 C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\VietLish.pdb
 C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\VietLish.genruntimeconfig.cache
 C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\Razor\Views\Home\TestModule.cshtml.g.cs
+C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\Razor\Views\Home\Sentence.cshtml.g.cs
+C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.Google.dll
+C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\Razor\Views\Shared\SignUp.cshtml.g.cs
+C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\Razor\Views\Home\Mark.cshtml.g.cs

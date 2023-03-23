@@ -18,9 +18,11 @@ namespace ELearning.Models
         }
 
         public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Answer> Answers { get; set; }
         public virtual DbSet<Module> Modules { get; set; }
         public virtual DbSet<Level> Levels { get; set; }
         public virtual DbSet<Part> Parts { get; set; }
+        public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Sentence> Sentences { get; set; }
         public virtual DbSet<Test> Tests { get; set; }
@@ -82,6 +84,24 @@ namespace ELearning.Models
                     .HasConstraintName("FK__Account__role_id__38996AB5");
             });
 
+            modelBuilder.Entity<Answer>(entity =>
+            {
+                entity.ToTable("Answer");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Answer1)
+                    .IsRequired()
+                    .HasColumnName("Answer");
+
+                entity.Property(e => e.QuestionId).HasColumnName("question_id");
+
+                entity.HasOne(d => d.Question)
+                    .WithMany(p => p.Answers)
+                    .HasForeignKey(d => d.QuestionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Answer__Correct__60A75C0F");
+            });
+
             modelBuilder.Entity<Module>(entity =>
             {
                 entity.ToTable("Module");
@@ -139,6 +159,24 @@ namespace ELearning.Models
                 entity.Property(e => e.PartName)
                     .IsRequired()
                     .HasColumnName("part_name");
+            });
+
+            modelBuilder.Entity<Question>(entity =>
+            {
+                entity.ToTable("Question");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.ModuleId).HasColumnName("module_id");
+                entity.Property(e => e.Question1)
+                    .IsRequired()
+                    .HasColumnName("Question");
+
+            
+                entity.HasOne(d => d.Module)
+                    .WithMany(p => p.Questions)
+                    .HasForeignKey(d => d.ModuleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Question__module__5DCAEF64");
             });
 
             modelBuilder.Entity<Role>(entity =>

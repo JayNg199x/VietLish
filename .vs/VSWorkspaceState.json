@@ -2,8 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\Elearning",
-    "\\Elearning\\Models"
+    "\\Elearning\\Controllers",
+    "\\Elearning\\Models",
+    "\\Elearning\\Views",
+    "\\Elearning\\Views\\Home",
+    "\\Elearning\\Views\\Shared"
   ],
-  "SelectedNode": "\\ELearning.sln",
+  "SelectedNode": "\\Elearning\\Controllers\\HomeController.cs",
   "PreviewInSolutionExplorer": false
 }

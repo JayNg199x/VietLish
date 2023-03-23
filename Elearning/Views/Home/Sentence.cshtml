@@ -1,0 +1,34 @@
+﻿@model IEnumerable<ELearning.Models.Sentence>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>NO</th>
+                <th>Sentence</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Sentence j in Model)
+            {
+                <tr>
+                    <td class="nr td-action text-center"></td>
+                    <td>@j.SentenceS</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    var a = document.getElementsByClassName("nr");
+    for (var i = 0; i < a.length; i++) {
+        a[i].innerHTML = (i + 1);
+    }
+</script>
