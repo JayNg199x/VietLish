@@ -6,11 +6,11 @@
 
 @if (ViewBag.score < 5)
 {
-    <h3>ViewBag.score - <b style ="color:red">Not Pass</b></h3>
+    <h3>Mark: @ViewBag.score - <b style ="color:red">Not Pass</b></h3>
 
 }
 @if (ViewBag.score >= 5)
 {
-    <h3>ViewBag.score - <b style ="color:green"> Passed</b></h3>
+    <h3>Mark: @ViewBag.score - <b style ="color:green"> Passed</b></h3>
 
 }

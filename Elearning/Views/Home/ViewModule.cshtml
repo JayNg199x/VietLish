@@ -1,4 +1,4 @@
-﻿@model List<VietLish.DTO.ModuleDTO>
+﻿@model List<ELearning.Models.Vocabulary>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -22,43 +22,40 @@
         margin-left: 5%;
     }
 </style>
-
-
+<a href="/Home/TestModule/@ViewBag.moduleId">Test</a>
 <div class="container">
-    <form class=" navbar-form navbar-right">
-        <input type="text" class="form-control" placeholder="Search..." >
+    <form class="navbar-form navbar-right">
+        <input type="text" class="form-control" placeholder="Search...">
     </form>
 
     <table class="table">
         <thead>
             <tr>
                 <th>NO</th>
-                <th>Module</th>
+                <th>Word</th>
                 <th>Image</th>
-                <th>Part</th>
-                <th>Level</th>
-
+                <th>Pronunciation</th>
+                <th>Means</th>
+                
             </tr>
         </thead>
         <tbody>
             @foreach (var j in Model)
             {
                 <tr>
-                    <td class="nr td-action text-center"></td>
-                    <td>@j.Module1</td>
+                    <td class="nr td-actions text-center"></td>
+                    <td>@j.Word</td>
                     <td><img src="@j.Image" width="120" height="120"></td>
-                    <td>@j.Part</td>
-                    <td>@j.Level</td>
-                    <td><a href="/Home/ViewModule/@j.Id" class="btn btn-primary">View</a></td>
+                    <td>@j.Pronunciation</td>
+                    <td>@j.Means</td>
+                    
                 </tr>
             }
-
         </tbody>
     </table>
 </div>
 
 <nav aria-label="Page navigation example">
-
     <ul class="pagination">
         @{
             int numberPage = (int)ViewBag.numberPage;
@@ -66,7 +63,6 @@
 
             if (pageCurrent > 1)
             {
-
                 int prePage = pageCurrent - 1;
                 <li class="page-item">
                     <a class="page-link" href="?page=@prePage" aria-label="Previous">
@@ -88,8 +84,8 @@
                     <li class="page-item"><a href="?page=@i">@i</a></li>
                 }
             }
-            if (pageCurrent >= 1 && pageCurrent < numberPage - 1)
 
+            if (pageCurrent >= 1 && pageCurrent < numberPage - 1)
             {
                 int nextPage = pageCurrent + 1;
                 <li class="page-item">

@@ -14,6 +14,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using VietLish.DTO;
 
 namespace ELearning.Controllers
 {
@@ -110,10 +111,47 @@ namespace ELearning.Controllers
         public IActionResult EnrollLevel(int? id, int? page)
         {
             LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
-            var list = (from i in learningEnglishContext.Modules
-                        join j in learningEnglishContext.VocabInModule on i.Id equals j.ModuleId
-                        where i.LevelId == id
-                        select new Vocabulary { Image = j.Image, Word = j.Word, Means=j.Means, Pronunciation = j.Pronunciation }).ToList();
+            var list1 = (from i in learningEnglishContext.Modules
+                        join j in learningEnglishContext.Parts on i.PartId equals j.Id
+                         join l in learningEnglishContext.Levels on i.LevelId equals l.Id
+                         where i.LevelId == id
+                        select new
+                        {Id=i.Id, Image = j.Image, Module = i.Module1, Part=j.PartName, Level = l.Level1 }).ToList();
+
+            List<ModuleDTO> list = new List<ModuleDTO>();
+            foreach (var i in list1)
+            {
+                list.Add(new ModuleDTO(i.Id, i.Module, i.Part, i.Level, i.Image));
+            }
+            if (page > 0)
+            {
+                page = page;
+            }
+            else
+            {
+                page = 1;
+            }
+            ViewBag.moduleId = id;
+            int limit = 2;
+            int start = (int)(page - 1) * limit;
+            int total = list.Count();
+            ViewBag.total = total;
+            ViewBag.pageCurrent = page;
+            float numberPage = (total / limit);
+            ViewBag.numberPage = (int)Math.Ceiling(numberPage) + 1;
+            var data = list.OrderBy(s => s.Id).Skip(start).Take(limit).ToList();
+
+            return View(data);
+        }
+
+        public IActionResult ViewModule(int? id, int? page)
+        {
+            LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
+            var list =
+            (from i in learningEnglishContext.Modules
+             join j in learningEnglishContext.VocabInModule on i.Id equals j.ModuleId
+             where i.Id == id
+             select new Vocabulary { Id = i.Id, Image = j.Image, Word = j.Word, Pronunciation = j.Pronunciation, Means = j.Means }).ToList();
 
             if (page > 0)
             {
@@ -123,7 +161,8 @@ namespace ELearning.Controllers
             {
                 page = 1;
             }
-            int limit = 5;
+            ViewBag.moduleId = id;
+            int limit = 4;
             int start = (int)(page - 1) * limit;
             int total = list.Count();
             ViewBag.total = total;
@@ -131,23 +170,29 @@ namespace ELearning.Controllers
             float numberPage = (total / limit);
             ViewBag.numberPage = (int)Math.Ceiling(numberPage) + 1;
             var data = list.OrderBy(s => s.Id).Skip(start).Take(limit).ToList();
-            return View(data);
-        }
 
-        public IActionResult TestModule(int? id)
+            return View(data);
+        
+
+    }
+
+
+
+    public IActionResult TestModule(int? id)
         {
             LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
             var list = (from j in learningEnglishContext.Questions
-                       // join j in learningEnglishContext.Tests on i.Id equals j.ModuleId
                         where j.ModuleId == 1
                         select j).ToList();
 
             var list1 = (from j in learningEnglishContext.Answers
                          select j).ToList();
+            foreach( var i in list)
+            {
+                var x = i.Answers;
+            }
             return View(list);
-           // var rand = new Random();
-            //var selectedPost = list.Take(5).ToList();
-           // return View(selectedPost);
+         
         }
         public IActionResult Sentence(int? id)
         {
@@ -176,7 +221,7 @@ namespace ELearning.Controllers
                 }
             }
             ViewBag.score = score;
-            return RedirectToAction("Login");
+            return View("6");
         }
 
         public IActionResult Login()

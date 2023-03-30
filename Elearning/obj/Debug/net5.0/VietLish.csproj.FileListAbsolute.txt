@@ -164,3 +164,4 @@ C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\Razor\Views\Home\Se
 C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.Google.dll
 C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\Razor\Views\Shared\SignUp.cshtml.g.cs
 C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\Razor\Views\Home\Mark.cshtml.g.cs
+C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\Razor\Views\Home\ViewModule.cshtml.g.cs

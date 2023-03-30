@@ -22,6 +22,8 @@ namespace ELearning.Models
         public virtual DbSet<Module> Modules { get; set; }
         public virtual DbSet<Level> Levels { get; set; }
         public virtual DbSet<Part> Parts { get; set; }
+        public virtual DbSet<Result> Results { get; set; }
+
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Sentence> Sentences { get; set; }
@@ -159,6 +161,28 @@ namespace ELearning.Models
                 entity.Property(e => e.PartName)
                     .IsRequired()
                     .HasColumnName("part_name");
+            });
+
+            modelBuilder.Entity<Result>(entity =>
+            {
+                entity.ToTable("Result");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.AccountId).HasColumnName("accountId");
+                entity.Property(e => e.ModuleId).HasColumnName("moduleId");
+                entity.Property(e => e.Status).HasColumnName("status");
+
+                entity.HasOne(d => d.Account)
+                   .WithMany(p => p.Results)
+                   .HasForeignKey(d => d.AccountId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK__Result__accountI__02FC7413");
+
+                entity.HasOne(d => d.Module)
+                    .WithMany(p => p.Results)
+                    .HasForeignKey(d => d.ModuleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Result__moduleId__03F0984C");
             });
 
             modelBuilder.Entity<Question>(entity =>

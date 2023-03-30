@@ -1,6 +1,6 @@
 ﻿
 using System;
-using System.Collections.Concurrent;
+using System.Collections.Generic;
     #nullable disable
 
 namespace ELearning.Models
@@ -9,6 +9,7 @@ namespace ELearning.Models
     {
         public Account()
         {
+            Results = new HashSet<Result>();
         }
         public Account (string fullName, bool gender, string email, string contactNo, 
             string userName, string password, int roldeId, bool? status)
@@ -35,5 +36,10 @@ namespace ELearning.Models
         public bool? Status { get; set; }
 
         public virtual Role Role { get; set; }
+        public virtual ICollection<Result> Results { get; set; }
+
+
+
+
     }
 }

@@ -9,6 +9,7 @@ namespace ELearning.Models
     {
         public Module()
         {
+            Results = new HashSet<Result>();
             Questions = new HashSet<Question>();
             Sentences = new HashSet<Sentence>();
             VocabInModule = new HashSet<Vocabulary>();
@@ -23,6 +24,7 @@ namespace ELearning.Models
 
         public virtual Level Level { get; set; }
         public virtual Part Part { get; set; }
+        public virtual ICollection<Result> Results { get; set; }
 
         public virtual ICollection<Question> Questions { get; set; }
 
