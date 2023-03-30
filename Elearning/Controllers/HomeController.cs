@@ -221,7 +221,7 @@ namespace ELearning.Controllers
                 }
             }
             ViewBag.score = score;
-            return View("6");
+            return View();
         }
 
         public IActionResult Login()
