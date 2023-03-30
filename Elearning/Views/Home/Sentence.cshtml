@@ -1,30 +1,97 @@
-﻿@model IEnumerable<ELearning.Models.Sentence>
+﻿@model List<VietLish.DTO.SentenceDTO>
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    .row-padding {
+        display: inline-block;
+        margin-top: 20px;
+        border: 1px solid rgb(37, 150, 190);
+        font-size: 20px;
+        border-radius: 10px;
+        width: 70%;
+    }
+
+    .column {
+        float: left;
+        width: 20%;
+        padding: 10px;
+        height: 200px;
+        margin-left: 5%;
+    }
+</style>
+
 <div class="container">
+    <form class="navbar-form navbar-right">
+        <input type="text" class="form-control" placeholder="Search...">
+    </form>
+
     <table class="table">
         <thead>
             <tr>
                 <th>NO</th>
+                <th>Module</th>
                 <th>Sentence</th>
-               
             </tr>
         </thead>
         <tbody>
-            @foreach (Sentence j in Model)
+            @foreach (var j in Model)
             {
                 <tr>
-                    <td class="nr td-action text-center"></td>
-                    <td>@j.SentenceS</td>
+                    <td class="nr td-actions text-center"></td>
+                    <td>@j.Module</td>
+                    <td>@j.Sentence</td>
                 </tr>
             }
-
         </tbody>
     </table>
 </div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        @{
+            int numberPage = (int)ViewBag.numberPage;
+            int pageCurrent = ViewBag.pageCurrent;
+
+            if (pageCurrent > 1)
+            {
+                int prePage = pageCurrent - 1;
+                <li class="page-item">
+                    <a class="page-link" href="?page=@prePage" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+            }
+
+            int i;
+            for (i = 1; i < numberPage; i++)
+            {
+                if (i == pageCurrent)
+                {
+                    <li class="active page-item"><a class="page-link" href="?page=@i">@i</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a href="?page=@i">@i</a></li>
+                }
+            }
+
+            if (pageCurrent >= 1 && pageCurrent < numberPage - 1)
+            {
+                int nextPage = pageCurrent + 1;
+                <li class="page-item">
+                    <a class="page-link" href="?page=@nextPage" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            }
+        }
+    </ul>
+</nav>
 
 <script type="text/javascript">
     var a = document.getElementsByClassName("nr");

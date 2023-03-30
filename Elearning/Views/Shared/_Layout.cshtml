@@ -72,14 +72,30 @@
             <div class="side-menu-container" style="background-color: #f6f8fc;">
                 <ul class="nav navbar-nav">
 
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                    <li class="active"><a href="#"><i class="fa fa-puzzle-piece"></i> Module</a></li>
-                    
+                    <li class="@(ViewBag.Active == "5" ? "active" : "")"><a href="/Home/Index"><i class="fa fa-dashboard"></i>Home</a></li>
+                    <li class="@(ViewBag.Active == "6" ? "active" : "")"><a href="#"><i class="fa fa-puzzle-piece"></i>Mark</a></li>
+                    <li class="@(ViewBag.Active == "7" ? "active" : "")"><a href="/Home/Sentence"><i class="fa fa-building-o"></i>Sentence </a></li>
+
                 </ul>
+                }
+
+
+                @if (type == "1")
+                {
+                    <ul class="nav navbar-nav">
+
+                        <li class="@(ViewBag.Active == "1" ? "active" : "")"><a href="/Home/AccountManagement"><i class="fa fa-dashboard"></i>Account Management</a></li>
+                        <li class="@(ViewBag.Active == "2" ? "active" : "")"><a href="/Home/ModuleManagement"><i class="fa fa-puzzle-piece"></i>Module Management</a></li>
+                        <li class="@(ViewBag.Active == "3" ? "active" : "")"><a href="/Home/QuizManagement"><i class="fa fa-question"></i>Quiz Management</a></li>
+                        <li class="@(ViewBag.Active == "4" ? "active" : "")"><a href="/Home/WordManagement"><i class="fa fa-file-word-o"></i>Word Management</a></li>
+                        <li class="@(ViewBag.Active == "9" ? "active" : "")"><a href="/Home/SentenceManagement"><i class="fa fa-building-o"></i>Sentence Management</a></li>
+
+                    </ul>
+                }
+
             </div>
         </nav>
     </div>
-
     <div class="mcw">
         <div class="cv">
             <div>

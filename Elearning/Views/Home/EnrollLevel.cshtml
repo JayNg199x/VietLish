@@ -25,8 +25,8 @@
 
 
 <div class="container">
-    <form class=" navbar-form navbar-right">
-        <input type="text" class="form-control" placeholder="Search..." >
+    <form class="navbar-form navbar-right">
+        <input type="text" class="form-control" placeholder="Search...">
     </form>
 
     <table class="table">
@@ -37,28 +37,42 @@
                 <th>Image</th>
                 <th>Part</th>
                 <th>Level</th>
-
+                <th>Status</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var j in Model)
             {
                 <tr>
-                    <td class="nr td-action text-center"></td>
+                    <td class="nr td-actions text-center"></td>
                     <td>@j.Module1</td>
                     <td><img src="@j.Image" width="120" height="120"></td>
                     <td>@j.Part</td>
                     <td>@j.Level</td>
+                    <td>
+                        @*@(j.Status == true ? "Passed" : j.Status == false ? "Not Pass" : "Pending")*@
+                        @if (j.Status == true)
+                        {
+                            <button disabled type="button" class="btn btn-info">Passed</button>
+                        }
+                        else if (j.Status == false)
+                        {
+                            <button disabled type="button" class="btn btn-danger">Not Pass</button>
+                        }
+                        else if (j.Status == null)
+                        {
+                            <button disabled type="button" class="btn btn-warning">Pending</button>
+                        }
+                    </td>
                     <td><a href="/Home/ViewModule/@j.Id" class="btn btn-primary">View</a></td>
                 </tr>
             }
-
         </tbody>
     </table>
 </div>
 
 <nav aria-label="Page navigation example">
-
     <ul class="pagination">
         @{
             int numberPage = (int)ViewBag.numberPage;
@@ -66,7 +80,6 @@
 
             if (pageCurrent > 1)
             {
-
                 int prePage = pageCurrent - 1;
                 <li class="page-item">
                     <a class="page-link" href="?page=@prePage" aria-label="Previous">
@@ -88,8 +101,8 @@
                     <li class="page-item"><a href="?page=@i">@i</a></li>
                 }
             }
-            if (pageCurrent >= 1 && pageCurrent < numberPage - 1)
 
+            if (pageCurrent >= 1 && pageCurrent < numberPage - 1)
             {
                 int nextPage = pageCurrent + 1;
                 <li class="page-item">

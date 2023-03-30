@@ -175,13 +175,12 @@ namespace ELearning.Models
                 entity.HasOne(d => d.Account)
                    .WithMany(p => p.Results)
                    .HasForeignKey(d => d.AccountId)
-                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   
                    .HasConstraintName("FK__Result__accountI__02FC7413");
 
                 entity.HasOne(d => d.Module)
                     .WithMany(p => p.Results)
                     .HasForeignKey(d => d.ModuleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Result__moduleId__03F0984C");
             });
 
@@ -227,11 +226,13 @@ namespace ELearning.Models
                     .IsRequired()
                     .HasColumnName("level");
 
+                entity.Property(e => e.SentenceS).HasColumnName("sentence");
+
                 entity.HasOne(d => d.Module)
                     .WithMany(p => p.Sentences)
                     .HasForeignKey(d => d.ModuleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__SentenceS__lesso__45F365D3");
+                    .HasConstraintName("FK__Sentence__module__33D4B598");
             });
 
             modelBuilder.Entity<Vocabulary>(entity =>
@@ -240,17 +241,27 @@ namespace ELearning.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                //entity.Property(e => e.Antonymous).HasColumnName("antonymous");
+
                 entity.Property(e => e.Image)
                     .IsRequired()
                     .HasColumnName("image");
 
                 entity.Property(e => e.ModuleId).HasColumnName("module_id");
 
+                entity.Property(e => e.Means).HasColumnName("means");
+
+                entity.Property(e => e.Pronunciation).HasColumnName("pronunciation");
+
+                //entity.Property(e => e.Synonymous).HasColumnName("synonymous");
+
+                entity.Property(e => e.Word).HasColumnName("word");
+
                 entity.HasOne(d => d.Module)
                     .WithMany(p => p.VocabInModule)
                     .HasForeignKey(d => d.ModuleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__VocabInLe__lesso__4316F928");
+                    .HasConstraintName("FK__Vocabular__modul__30F848ED");
             });
             modelBuilder.Entity<Test>(entity =>
             {

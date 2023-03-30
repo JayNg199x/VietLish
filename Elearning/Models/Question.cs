@@ -11,6 +11,12 @@ namespace ELearning.Models
         {
             Answers = new HashSet<Answer>();
         }
+        public Question(int moduleId, string question1)
+        {
+            ModuleId = moduleId;
+            Question1 = question1;
+        }
+
 
         public int Id { get; set; }
         public int ModuleId { get; set; }

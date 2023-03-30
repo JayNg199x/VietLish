@@ -1,0 +1,55 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<style>
+    .form-outline {
+        margin-top: 3%;
+        position: relative;
+        text-align: center;
+        border-style: solid;
+        border-width: 1px;
+        border-color: gray;
+        display: inline-block;
+    }
+</style>
+<div class="form-outline" style="width: 40%;margin-left:20%">
+    <form action="/Home/DoAddSentence" method="post">
+        
+        <div class="form-group">
+            <label>Part:</label>
+            <select class="form-select" name="sentence.PartId">
+                @foreach (var i in ViewBag.Module)
+                {
+                    <option value="@i.Id">@i.Module1</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Sentence:</label>
+            <input type="text" name="sentence.Sentence" class="form-control" placeholder="Enter sentence" value="">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<script type="text/javascript">
+    var a = document.getElementsByClassName("nr");
+    for (var i = 0; i < a.length; i++) {
+        if (i == 0) {
+            a[i].innerHTML = "Answer A: ";
+        }
+        if (i == 1) {
+            a[i].innerHTML = "Answer B: ";
+        }
+        if (i == 2) {
+            a[i].innerHTML = "Answer C: ";
+        }
+        if (i == 3) {
+            a[i].innerHTML = "Answer D: ";
+        }
+
+    }
+</script>

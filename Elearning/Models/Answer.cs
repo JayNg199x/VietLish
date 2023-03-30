@@ -7,7 +7,13 @@ namespace ELearning.Models
 {
     public partial class Answer
     {
-        
+        public Answer(int questionId, string answer1, bool? correct)
+        {
+            QuestionId = questionId;
+            Answer1 = answer1;
+            Correct = correct;
+        }
+
         public int Id { get; set; }
         public int QuestionId { get; set; }
         public string Answer1 { get; set; }

@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">NO</th>
+                <th scope="col">Module</th>
+                <th scope="col">Level</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var j in Model)
+            {
+                <tr>
+                    <td class="nr td-actions text-center"></td>
+                    <td>@j.Module</td>
+                    <td>@j.Level</td>
+                    <td>
+                        @if (j.Status == true)
+                        {
+                            <button disabled type="button" class="btn btn-info">Passed</button>
+                        }
+                        else if (j.Status == false)
+                        {
+                            <button disabled type="button" class="btn btn-danger">Not Pass</button>
+                        }
+                        else if (j.Status == null)
+                        {
+                            <button disabled type="button" class="btn btn-warning">Pending</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    var a = document.getElementsByClassName("nr");
+    for (var i = 0; i < a.length; i++) {
+        a[i].innerHTML = (i + 1);
+    }
+</script>
