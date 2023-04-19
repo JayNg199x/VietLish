@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -31,7 +30,7 @@ namespace ELearning.Controllers
             await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme, new AuthenticationProperties()
             {
                 RedirectUri = Url.Action("GoogleResponse")
-             });
+            });
         }
 
         public async Task<IActionResult> GoogleResponse()
@@ -83,13 +82,11 @@ namespace ELearning.Controllers
             }
         }
 
-
         public IActionResult Index(int? id, int? page)
         {
             LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
             var list = learningEnglishContext.Levels.ToList();
             ViewBag.Active = "5";
-
             if (page > 0)
             {
                 page = page;
@@ -104,8 +101,9 @@ namespace ELearning.Controllers
             ViewBag.total = total;
             ViewBag.pageCurrent = page;
             float numberPage = (total / limit);
-            ViewBag.numberPage = (int) Math.Ceiling(numberPage) + 1;
+            ViewBag.numberPage = (int)Math.Ceiling(numberPage) + 1;
             var data = list.OrderBy(s => s.Id).Skip(start).Take(limit).ToList();
+
             return View(data);
         }
 
@@ -199,30 +197,26 @@ namespace ELearning.Controllers
             var data = list.OrderBy(s => s.Id).Skip(start).Take(limit).ToList();
 
             return View(data);
-        
-
         }
-
-
 
         public IActionResult TestModule(int? id)
         {
             LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
             var list = (from j in learningEnglishContext.Questions
-                        where j.ModuleId == 1
+                        where j.ModuleId == id
                         select j).ToList();
-
             var list1 = (from j in learningEnglishContext.Answers
                          select j).ToList();
-            foreach( var i in list)
+            //ViewBag.ModuleId = id;
+            foreach (var i in list)
             {
                 var x = i.Answers;
             }
             var moduleId = Newtonsoft.Json.JsonConvert.SerializeObject(id);
             HttpContext.Session.SetString("moduleId", moduleId);
             return View(list);
-         
         }
+
         public IActionResult ViewMark()
         {
             string? id = HttpContext.Session.GetString("userId");
@@ -245,6 +239,7 @@ namespace ELearning.Controllers
             }
             ViewBag.Active = "6";
             return View(list);
+            //return RedirectToAction("Index");
         }
 
         public IActionResult Mark(IFormCollection iformCollection)
@@ -295,7 +290,92 @@ namespace ELearning.Controllers
             return View();
         }
 
-        public IActionResult Sentence(int? page)
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+
+        public IActionResult DoSignup(Account account)
+        {
+            LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
+            var acc = learningEnglishContext.Accounts.FirstOrDefault(x => x.Email.Equals(account.Email));
+            if (acc == null)
+            {
+                account.FullName = "account.Email";
+                account.Password = EncodePassword(account.Password);
+                account.RoleId = 2;
+                account.Status = true;
+                account.Gender = true;
+                account.ContactNo = "0971858758";
+                account.UserName = account.Email;
+                learningEnglishContext.Accounts.Add(account);
+                learningEnglishContext.SaveChanges();
+                var username = JsonConvert.SerializeObject(account.UserName);
+                var role = JsonConvert.SerializeObject(account.RoleId);
+                var act = Newtonsoft.Json.JsonConvert.SerializeObject(account);
+                HttpContext.Session.SetString("username", username);
+                HttpContext.Session.SetString("role", role);
+                HttpContext.Session.SetString("act", act);
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Login");
+        }
+
+        public IActionResult DoLogin(Account account)
+        {
+            LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
+
+            var acc = learningEnglishContext.Accounts.FirstOrDefault(x => x.Email.Equals(account.Email) && (x.Password).Equals(account.Password));
+            if (acc != null)
+            {
+                var username = JsonConvert.SerializeObject(acc.UserName);
+                var role = JsonConvert.SerializeObject(acc.RoleId);
+                var act = Newtonsoft.Json.JsonConvert.SerializeObject(acc);
+                HttpContext.Session.SetString("username", username);
+                HttpContext.Session.SetString("role", role);
+                HttpContext.Session.SetString("act", act);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.NoAccount = "Account is not exist";
+                return RedirectToAction("Login");
+            }
+        }
+
+        public static string EncodePassword(string password)
+        {
+            try
+            {
+                byte[] encData_byte = new byte[password.Length];
+                encData_byte = System.Text.Encoding.UTF8.GetBytes(password);
+                string encodedData = Convert.ToBase64String(encData_byte);
+                return encodedData;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error in base64Encode" + ex.Message);
+            }
+        }
+
+        public string DecodePassword(string encodedData)
+        {
+            System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
+            System.Text.Decoder utf8Decode = encoder.GetDecoder();
+            byte[] todecode_byte = Convert.FromBase64String(encodedData);
+            int charCount = utf8Decode.GetCharCount(todecode_byte, 0, todecode_byte.Length);
+            char[] decoded_char = new char[charCount];
+            utf8Decode.GetChars(todecode_byte, 0, todecode_byte.Length, decoded_char, 0);
+            string result = new String(decoded_char);
+            return result;
+        }
+
+        public IActionResult SentenceStructure(int? page)
         {
             LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
             var listSentence = (from sc in learningEnglishContext.Sentences
@@ -304,14 +384,14 @@ namespace ELearning.Controllers
                                 {
                                     Id = sc.Id,
                                     Module = module.Module1,
-                                    Sentence = sc.SentenceS
+                                    Sentence = sc.Sentence
                                 }
                            ).ToList();
 
-            List<SentenceDTO> list = new List<SentenceDTO>();
+            List<SentenceStructureDTO> list = new List<SentenceStructureDTO>();
             foreach (var i in listSentence)
             {
-                list.Add(new SentenceDTO(i.Id, i.Module, i.Sentence));
+                list.Add(new SentenceStructureDTO(i.Id, i.Module, i.Sentence));
             }
 
             ViewBag.Active = "7";
@@ -334,96 +414,6 @@ namespace ELearning.Controllers
             return View(data);
         }
 
-
-
-
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        public IActionResult SignUp()
-        {
-            return View();
-        }
-
-        public IActionResult DoSignup(Account account)
-        {
-            LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
-            var acc = learningEnglishContext.Accounts.FirstOrDefault(x => x.Email.Equals(account.Email));
-            if (acc == null)
-            {
-                account.FullName = account.Email;
-                account.Password = EncodePassword(account.Password);
-                account.RoleId = 2;
-                account.Status = true;
-                account.Gender = true;
-                account.ContactNo = "Null";
-                account.UserName = account.Email;
-                learningEnglishContext.Accounts.Add(account);
-                learningEnglishContext.SaveChanges();
-                var username = JsonConvert.SerializeObject(account.UserName);
-                var role = JsonConvert.SerializeObject(account.RoleId);
-                var act = Newtonsoft.Json.JsonConvert.SerializeObject(account);
-                HttpContext.Session.SetString("username", username);
-                HttpContext.Session.SetString("role", role);
-                HttpContext.Session.SetString("act", act);
-                return RedirectToAction("Index");
-            }
-            return RedirectToAction("Login");
-        }
-
-        public IActionResult DoLogin(Account account)
-        {
-            LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
-
-            var acc = learningEnglishContext.Accounts.SingleOrDefault(x => x.Email.Equals(account.Email) && (x.Password).Equals(account.Password));
-            if (acc != null)
-            {
-                var username = JsonConvert.SerializeObject(acc.UserName);
-                var role = JsonConvert.SerializeObject(acc.RoleId);
-                var act = Newtonsoft.Json.JsonConvert.SerializeObject(acc);
-                HttpContext.Session.SetString("username", username);
-                HttpContext.Session.SetString("role", role);
-                HttpContext.Session.SetString("act", act);
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                ViewBag.NoAccount = "Account is not exist";
-
-                return RedirectToAction("Login");
-            }
-        }
-
-        public static string EncodePassword(string password)
-        {
-            try
-            {
-                byte[] encData_byte = new byte[password.Length];
-                encData_byte = System.Text.Encoding.UTF8.GetBytes(password);
-                string hashed = Convert.ToBase64String(encData_byte);
-                return hashed;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error in base64Encode" + ex.Message);
-            }
-        }
-
-        public string DecodePassword(string encodedData)
-        {
-            System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
-            System.Text.Decoder utf8Decode = encoder.GetDecoder();
-            byte[] todecode_byte = Convert.FromBase64String(encodedData);
-            int charCount = utf8Decode.GetCharCount(todecode_byte, 0, todecode_byte.Length);
-            char[] decoded_char = new char[charCount];
-            utf8Decode.GetChars(todecode_byte, 0, todecode_byte.Length, decoded_char, 0);
-            string result = new String(decoded_char);
-            return result;
-        }
-
-        // Admin management
         public IActionResult SentenceManagement(int? page)
         {
             LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
@@ -434,14 +424,14 @@ namespace ELearning.Controllers
                                     Id = sc.Id,
                                     Module = module.Module1,
                                     ModuleId = module.Id,
-                                    Sentence = sc.SentenceS
+                                    Sentence = sc.Sentence
                                 }
                            ).ToList();
 
-            List<SentenceDTO> list = new List<SentenceDTO>();
+            List<SentenceStructureDTO> list = new List<SentenceStructureDTO>();
             foreach (var i in listSentence)
             {
-                list.Add(new SentenceDTO(i.Id, i.Module, i.ModuleId, i.Sentence));
+                list.Add(new SentenceStructureDTO(i.Id, i.Module, i.ModuleId, i.Sentence));
             }
 
             ViewBag.Active = "8";
@@ -464,7 +454,7 @@ namespace ELearning.Controllers
             return View(data);
         }
 
-        public IActionResult SentenceDelete(int? id)
+        public IActionResult SentenceStructureDelete(int? id)
         {
             LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
             var sentence = learningEnglishContext.Sentences.SingleOrDefault(x => x.Id == id);
@@ -483,7 +473,7 @@ namespace ELearning.Controllers
             return View();
         }
 
-        public IActionResult DoAddSentence(Sentence sentence)
+        public IActionResult DoAddSentence(SentenceStructure sentence)
         {
             LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
             sentence.Level = "Default";
@@ -491,7 +481,6 @@ namespace ELearning.Controllers
             learningEnglishContext.SaveChanges();
             return RedirectToAction("SentenceManagement");
         }
-
 
         public IActionResult AccountManagement(int? page)
         {
@@ -596,7 +585,6 @@ namespace ELearning.Controllers
             return RedirectToAction("ModuleManagement");
         }
 
-     
         public IActionResult AddNewModule()
         {
             LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
@@ -691,8 +679,7 @@ namespace ELearning.Controllers
                                  Image = vocab.Image,
                                  Word = vocab.Word,
                                  Pronunciation = vocab.Pronunciation,
-                                 Means = vocab.Means,
-                                 
+                                 Means = vocab.Means,                               
                              }).ToList();
             ViewBag.Active = "4";
             List<VocabDTO> list = new List<VocabDTO>();
@@ -734,21 +721,20 @@ namespace ELearning.Controllers
             }
             return RedirectToAction("WordManagement");
         }
-        
 
         public IActionResult UpdateQuiz(int? id)
         {
             LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
             ViewBag.Active = "3";
             var question = learningEnglishContext.Questions.SingleOrDefault(x => x.Id == id);
-            var moudle = learningEnglishContext.Modules.ToList();
+            var module = learningEnglishContext.Modules.ToList();
             var quiz = (from j in learningEnglishContext.Answers
                         where j.QuestionId == id
                         select j).ToList();
             if (question != null)
             {
                 ViewBag.ModuleId = question.ModuleId;
-                ViewBag.Module = moudle;
+                ViewBag.Module = module;
                 return View(question);
             }
             return RedirectToAction("QuizManagement");
@@ -816,7 +802,6 @@ namespace ELearning.Controllers
             return RedirectToAction("QuizManagement");
         }
 
-       
         public IActionResult AddNewWord()
         {
             LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
@@ -830,16 +815,16 @@ namespace ELearning.Controllers
         {
             LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
             ViewBag.Active = "4";
-            var voacbInModule1 = learningEnglishContext.VocabInModule.SingleOrDefault(x => x.Id == vocabulary.Id);
-            if (voacbInModule1 != null)
+            var vocabInModule1 = learningEnglishContext.VocabInModule.SingleOrDefault(x => x.Id == vocabulary.Id);
+            if (vocabInModule1 != null)
             {
-                voacbInModule1.Word = vocabulary.Word;
-                voacbInModule1.Pronunciation = vocabulary.Pronunciation;
-                voacbInModule1.Means = vocabulary.Means;
-                
+                vocabInModule1.Word = vocabulary.Word;
+                vocabInModule1.Pronunciation = vocabulary.Pronunciation;
+                vocabInModule1.Means = vocabulary.Means;
+              
                 if (vocabulary.Image != null)
                 {
-                    voacbInModule1.Image = vocabulary.Image;
+                    vocabInModule1.Image = vocabulary.Image;
                 }
                 learningEnglishContext.SaveChanges();
             }
@@ -856,14 +841,12 @@ namespace ELearning.Controllers
         }
 
       
-
         public IActionResult PartManagement()
         {
             LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
-            var listSentence = learningEnglishContext.Parts.ToList();
-            return View(listSentence);
+            var listSentenceStructure = learningEnglishContext.Parts.ToList();
+            return View(listSentenceStructure);
         }
-
 
         public IActionResult Logout()
         {
@@ -872,6 +855,7 @@ namespace ELearning.Controllers
             HttpContext.Session.Remove("username");
             return RedirectToAction("Index");
         }
+
 
         public IActionResult Privacy()
         {

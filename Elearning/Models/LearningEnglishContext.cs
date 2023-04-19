@@ -26,7 +26,7 @@ namespace ELearning.Models
 
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Sentence> Sentences { get; set; }
+        public virtual DbSet<SentenceStructure> Sentences { get; set; }
         public virtual DbSet<Test> Tests { get; set; }
 
         public virtual DbSet<Vocabulary> VocabInModule { get; set; }
@@ -139,6 +139,9 @@ namespace ELearning.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.Description).HasColumnName("description");
+
+
                 entity.Property(e => e.Image)
                     .IsRequired()
                     .HasColumnName("image");
@@ -214,9 +217,9 @@ namespace ELearning.Models
                     .HasColumnName("role_name");
             });
 
-            modelBuilder.Entity<Sentence>(entity =>
+            modelBuilder.Entity<SentenceStructure>(entity =>
             {
-                entity.ToTable("Sentence");
+                entity.ToTable("SentenceStructure");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
@@ -226,7 +229,7 @@ namespace ELearning.Models
                     .IsRequired()
                     .HasColumnName("level");
 
-                entity.Property(e => e.SentenceS).HasColumnName("sentence");
+                entity.Property(e => e.Sentence).HasColumnName("sentence");
 
                 entity.HasOne(d => d.Module)
                     .WithMany(p => p.Sentences)

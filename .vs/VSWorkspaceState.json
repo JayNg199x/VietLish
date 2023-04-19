@@ -8,6 +8,6 @@
     "\\Elearning\\Views\\Home",
     "\\Elearning\\Views\\Shared"
   ],
-  "SelectedNode": "\\Elearning\\Startup.cs",
+  "SelectedNode": "\\Elearning\\Controllers\\HomeController.cs",
   "PreviewInSolutionExplorer": false
 }
