@@ -16,17 +16,15 @@
 </style>
 <div class="form-outline" style="width: 40%;margin-left:20%">
     <form action="/Home/DoAddSentence" method="post">
-        
         <div class="form-group">
             <label>Part:</label>
-            <select class="form-select" name="sentence.PartId">
+            <select class="form-select" name="sentence.ModuleId">
                 @foreach (var i in ViewBag.Module)
                 {
                     <option value="@i.Id">@i.Module1</option>
                 }
             </select>
         </div>
-
         <div class="form-group">
             <label>Sentence:</label>
             <input type="text" name="sentence.Sentence" class="form-control" placeholder="Enter sentence" value="">

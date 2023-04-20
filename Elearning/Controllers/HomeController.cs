@@ -601,7 +601,7 @@ namespace ELearning.Controllers
             LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
             if (module != null)
             {
-                module.Image = "/img/" + module.Image;
+                module.Image = "/img/module" + module.Image;
                 learningEnglishContext.Modules.Add(module);
                 learningEnglishContext.SaveChanges();
             }
@@ -834,9 +834,14 @@ namespace ELearning.Controllers
         public IActionResult DoAddNewWord(Vocabulary vocabulary)
         {
             LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
+            if(vocabulary != null)
+            {
+                vocabulary.Image = "/img/vocab/" + vocabulary.Image;
+                learningEnglishContext.VocabInModule.Add(vocabulary);
+                learningEnglishContext.SaveChanges();
+
+            }
             ViewBag.Active = "4";
-            learningEnglishContext.VocabInModule.Add(vocabulary);
-            learningEnglishContext.SaveChanges();
             return RedirectToAction("WordManagement");
         }
 

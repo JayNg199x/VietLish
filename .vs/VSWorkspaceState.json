@@ -3,11 +3,12 @@
     "",
     "\\Elearning",
     "\\Elearning\\Controllers",
+    "\\Elearning\\DTO",
     "\\Elearning\\Models",
     "\\Elearning\\Views",
     "\\Elearning\\Views\\Home",
     "\\Elearning\\Views\\Shared"
   ],
-  "SelectedNode": "\\Elearning\\Controllers\\HomeController.cs",
+  "SelectedNode": "\\Elearning\\Views\\Shared\\_Layout.cshtml",
   "PreviewInSolutionExplorer": false
 }

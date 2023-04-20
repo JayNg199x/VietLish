@@ -45,7 +45,7 @@
                     <td>@j.Module</td>
                     <td>@j.Sentence</td>
                     <td>
-                        <a href="/Home/SentenceDelete/@j.Id">Delete</a>
+                        <a href="/Home/SentenceStructureDelete/@j.Id">Delete</a>
                     </td>
                 </tr>
             }
@@ -71,7 +71,7 @@
             }
 
             int i;
-            for (i = 1; i < numberPage; i++)
+            for (i = 1; i < numberPage + 1; i++)
             {
                 if (i == pageCurrent)
                 {
@@ -83,7 +83,7 @@
                 }
             }
 
-            if (pageCurrent >= 1 && pageCurrent < numberPage - 1)
+            if (pageCurrent >= 1 && pageCurrent < numberPage)
             {
                 int nextPage = pageCurrent + 1;
                 <li class="page-item">

@@ -1,14 +1,13 @@
 ﻿@model IEnumerable<ELearning.Models.Question>
 
-    @{
+@{
     ViewData["Title"] = "Home Page";
-    
-    }
+}
 
 <div class="container mb-5">
     <div class="row">
         <div class="col-12">
-            <form action="/Home/Mark" method="post">
+            <form action="/Home/Mark/@ViewBag.ModuleId" method="post">
                 <ol type="1">
                     @foreach (Question j in Model)
                     {
@@ -29,6 +28,7 @@
                 </ol>
                 <button type="submit" class="btn btn-danger">Submit</button>
             </form>
+
         </div>
     </div>
 </div>
