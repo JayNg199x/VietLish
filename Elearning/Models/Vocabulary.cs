@@ -12,7 +12,7 @@ namespace ELearning.Models
         public string Image { get; set; }
         public string Word { get; set; }
         public string Pronunciation { get; set; }
-        public string Means { get; set; }
+        public string Meaning { get; set; }
 
 
 

@@ -176,7 +176,7 @@ namespace ELearning.Controllers
             (from i in learningEnglishContext.Modules
              join j in learningEnglishContext.VocabInModule on i.Id equals j.ModuleId
              where i.Id == id
-             select new Vocabulary { Id = i.Id, Image = j.Image, Word = j.Word, Pronunciation = j.Pronunciation, Means = j.Means }).ToList();
+             select new Vocabulary { Id = i.Id, Image = j.Image, Word = j.Word, Pronunciation = j.Pronunciation, Meaning = j.Meaning }).ToList();
 
             if (page > 0)
             {
@@ -601,7 +601,7 @@ namespace ELearning.Controllers
             LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
             if (module != null)
             {
-                module.Image = "/img/module" + module.Image;
+                module.Image = "/img/module/" + module.Image;
                 learningEnglishContext.Modules.Add(module);
                 learningEnglishContext.SaveChanges();
             }
@@ -656,7 +656,7 @@ namespace ELearning.Controllers
             {
                 page = 1;
             }
-            int limit = 5;
+            int limit = 10;
             int start = (int)(page - 1) * limit;
             int total = list.Count();
             ViewBag.total = total;
@@ -679,14 +679,14 @@ namespace ELearning.Controllers
                                  Image = vocab.Image,
                                  Word = vocab.Word,
                                  Pronunciation = vocab.Pronunciation,
-                                 Means = vocab.Means,                               
+                                 Meaning = vocab.Meaning,                               
                              }).ToList();
             ViewBag.Active = "4";
             List<VocabDTO> list = new List<VocabDTO>();
 
             foreach (var i in listVocab)
             {
-                list.Add(new VocabDTO(i.Id, i.Module, i.Image, i.Word, i.Pronunciation, i.Means));
+                list.Add(new VocabDTO(i.Id, i.Module, i.Image, i.Word, i.Pronunciation, i.Meaning));
             }
 
             if (page > 0)
@@ -820,7 +820,7 @@ namespace ELearning.Controllers
             {
                 vocabInModule1.Word = vocabulary.Word;
                 vocabInModule1.Pronunciation = vocabulary.Pronunciation;
-                vocabInModule1.Means = vocabulary.Means;
+                vocabInModule1.Meaning = vocabulary.Meaning;
               
                 if (vocabulary.Image != null)
                 {

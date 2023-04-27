@@ -35,8 +35,8 @@
                 <th>Word</th>
                 <th>Image</th>
                 <th>Pronunciation</th>
-                <th>Means</th>
-                
+                <th>Meaning</th>
+
             </tr>
         </thead>
         <tbody>
@@ -47,8 +47,8 @@
                     <td>@j.Word</td>
                     <td><img src="@j.Image" width="120" height="120"></td>
                     <td>@j.Pronunciation</td>
-                    <td>@j.Means</td>
-                    
+                    <td>@j.Meaning</td>
+
                 </tr>
             }
         </tbody>
@@ -73,7 +73,7 @@
             }
 
             int i;
-            for (i = 1; i < numberPage; i++)
+            for (i = 1; i < numberPage + 1; i++)
             {
                 if (i == pageCurrent)
                 {
@@ -85,7 +85,7 @@
                 }
             }
 
-            if (pageCurrent >= 1 && pageCurrent < numberPage - 1)
+            if (pageCurrent >= 1 && pageCurrent < numberPage)
             {
                 int nextPage = pageCurrent + 1;
                 <li class="page-item">

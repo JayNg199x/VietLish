@@ -252,7 +252,7 @@ namespace ELearning.Models
 
                 entity.Property(e => e.ModuleId).HasColumnName("module_id");
 
-                entity.Property(e => e.Means).HasColumnName("means");
+                entity.Property(e => e.Meaning).HasColumnName("meaning");
 
                 entity.Property(e => e.Pronunciation).HasColumnName("pronunciation");
 
