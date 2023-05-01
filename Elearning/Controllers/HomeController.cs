@@ -225,6 +225,7 @@ namespace ELearning.Controllers
             var userMark = (from pl in learningEnglishContext.Results
                             join module in learningEnglishContext.Modules on pl.ModuleId equals module.Id
                             join level in learningEnglishContext.Levels on module.LevelId equals level.Id
+                            where pl.AccountId == Convert.ToInt32(userId)
                             select new
                             {
                                 Module = module.Module1,
@@ -282,7 +283,7 @@ namespace ELearning.Controllers
                 Result result = new Result();
                 result.AccountId = Convert.ToInt32(userId1);
                 result.ModuleId = Convert.ToInt32(moduleId);
-                result.Status = score >= 5 ? true : false;
+                result.Status = score >= 8 ? true : false;
                 learningEnglishContext.Results.Add(result);
                 learningEnglishContext.SaveChanges();
             }
@@ -317,7 +318,7 @@ namespace ELearning.Controllers
                 learningEnglishContext.SaveChanges();
                 var username = JsonConvert.SerializeObject(account.UserName);
                 var role = JsonConvert.SerializeObject(account.RoleId);
-                var act = Newtonsoft.Json.JsonConvert.SerializeObject(account);
+                var act = JsonConvert.SerializeObject(account);
                 HttpContext.Session.SetString("username", username);
                 HttpContext.Session.SetString("role", role);
                 HttpContext.Session.SetString("act", act);
@@ -335,7 +336,7 @@ namespace ELearning.Controllers
             {
                 var username = JsonConvert.SerializeObject(acc.UserName);
                 var role = JsonConvert.SerializeObject(acc.RoleId);
-                var act = Newtonsoft.Json.JsonConvert.SerializeObject(acc);
+                var act = JsonConvert.SerializeObject(acc);
                 HttpContext.Session.SetString("username", username);
                 HttpContext.Session.SetString("role", role);
                 HttpContext.Session.SetString("act", act);
@@ -858,7 +859,7 @@ namespace ELearning.Controllers
             HttpContext.Session.Remove("act");
             HttpContext.Session.Remove("role");
             HttpContext.Session.Remove("username");
-            return RedirectToAction("Index");
+            return RedirectToAction("Login");
         }
 
 
