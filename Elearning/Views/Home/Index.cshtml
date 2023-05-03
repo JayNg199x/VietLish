@@ -1,107 +1,103 @@
-﻿    @model List<ELearning.Models.Level>
-    @using Microsoft.AspNetCore.Http
-    @inject IHttpContextAccessor Accessor
-    @{string? username = Accessor.HttpContext.Session.GetString("username");
-        string? type = Accessor.HttpContext.Session.GetString("role");}
-    @{
-        ViewData["Title"] = "Home Page";
+﻿@model List<ELearning.Models.Level>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+@{string? username = Accessor.HttpContext.Session.GetString("username");
+    string? type = Accessor.HttpContext.Session.GetString("role");}
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .row-padding {
+        display: inline-block;
+        margin-top: 20px;
+        border: 1px solid rgb(37, 150, 190);
+        font-size: 20px;
+        border-radius: 10px;
+        width: 70%;
     }
 
-    <style>
-        .row-padding {
-            display: inline-block;
-            margin-top: 20px;
-            border: 1px solid rgb(37, 150, 190);
-            font-size: 20px;
-            border-radius: 10px;
-            width: 70%;
-        }
-
-        .column {
-            float: left;
-            width: 20%;
-            padding: 10px;
-            height: 200px;
-            margin-left: 5%;
-        }
-    </style>
-    @if (username != null)
-    {
-        <div class="container">
-            @*<form class="navbar-form navbar-right">
+    .column {
+        float: left;
+        width: 20%;
+        padding: 10px;
+        height: 200px;
+        margin-left: 5%;
+    }
+</style>
+@if (username != null)
+{
+    <div class="container">
+        @*<form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search...">
             </form>*@
-            <table class="table">
-                <tbody>
-                    @foreach (Level j in Model)
+        <table class="table">
+            <tbody>
+                @foreach (Level j in Model)
+                {
+                    <tr>
+                        <td class="nr td-actions text-center"></td>
+                        <td><img src="@j.Image" width="120" height="120"></td>
+                        <td>@j.Description</td>
+                        <td>@j.Level1</td>
+                        <td><a href="/Home/EnrollLevel/@j.Id" class="btn btn-primary">Beginning</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @{
+                int numberPage = (int)ViewBag.numberPage;
+                int pageCurrent = ViewBag.pageCurrent;
+
+                if (pageCurrent > 1)
+                {
+                    int prePage = pageCurrent - 1;
+                    <li class="page-item">
+                        <a class="page-link" href="?page=@prePage" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                }
+
+                int i;
+                for (i = 1; i < numberPage +1; i++)
+                {
+                    if (i == pageCurrent)
                     {
-                        <tr>
-                            <td class="nr td-actions text-center"></td>
-                            <td><img src="@j.Image" width="120" height="120"></td>
-                            <td>@j.Description</td>
-                            <td>@j.Level1</td>
-                            <td><a href="/Home/EnrollLevel/@j.Id" class="btn btn-primary">Enroll</a></td>
-                        </tr>
+                        <li class="active page-item"><a class="page-link" href="?page=@i">@i</a></li>
                     }
-                </tbody>
-            </table>
-        </div>
-
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                @{
-                    int numberPage = (int)ViewBag.numberPage;
-                    int pageCurrent = ViewBag.pageCurrent;
-
-                    if (pageCurrent > 1)
+                    else
                     {
-                        int prePage = pageCurrent - 1;
-                        <li class="page-item">
-                            <a class="page-link" href="?page=@prePage" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
-                    }
-
-                    int i;
-                    for (i = 1; i < numberPage; i++)
-                    {
-                        if (i == pageCurrent)
-                        {
-                            <li class="active page-item"><a class="page-link" href="?page=@i">@i</a></li>
-                        }
-                        else
-                        {
-                            <li class="page-item"><a href="?page=@i">@i</a></li>
-                        }
-                    }
-
-                    if (pageCurrent >= 1 && pageCurrent < numberPage - 1)
-                    {
-                        int nextPage = pageCurrent + 1;
-                        <li class="page-item">
-                            <a class="page-link" href="?page=@nextPage" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
+                        <li class="page-item"><a href="?page=@i">@i</a></li>
                     }
                 }
-            </ul>
-        </nav>
 
-        <script type="text/javascript">
-            var a = document.getElementsByClassName("nr");
-            for (var i = 0; i < a.length; i++) {
-                a[i].innerHTML = (i + 1);
+                if (pageCurrent >= 1 && pageCurrent < numberPage - 1)
+                {
+                    int nextPage = pageCurrent + 1;
+                    <li class="page-item">
+                        <a class="page-link" href="?page=@nextPage" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                }
             }
-        </script>
-
-    }
-
+        </ul>
+    </nav>
 
 
 
+    <script type="text/javascript">
+        var a = document.getElementsByClassName("nr");
+        for (var i = 0; i < a.length; i++) {
+            a[i].innerHTML = (i + 1);
+        }
+    </script>
 
-
+}
