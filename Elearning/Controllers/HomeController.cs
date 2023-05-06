@@ -262,7 +262,8 @@ namespace ELearning.Controllers
             string userId1 = JsonConvert.DeserializeObject<string>(userId);
 
 
-            int score = 0;
+            int correctAnswers = 0;
+            int totalQuestions = 0;
             string[] questionId = iformCollection["questionId"];
             LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
             foreach (var i in questionId)
@@ -270,8 +271,9 @@ namespace ELearning.Controllers
                 int idAnswerCorrect = learningEnglishContext.Answers.Where(a => a.Correct == true && a.QuestionId == Convert.ToInt32(i)).FirstOrDefault().Id;
                 if (idAnswerCorrect == Convert.ToInt32(iformCollection["question_" + i]))
                 {
-                    score++;
+                    correctAnswers++;
                 }
+                totalQuestions++;
             }
 
             var available = learningEnglishContext.Results
@@ -279,7 +281,7 @@ namespace ELearning.Controllers
 
             if (available != null)
             {
-                available.Status = score >= 8 ? true : false;
+                available.Status = correctAnswers >= 8 ? true : false;
                 learningEnglishContext.SaveChanges();
             }
             else
@@ -287,13 +289,17 @@ namespace ELearning.Controllers
                 Result result = new Result();
                 result.AccountId = Convert.ToInt32(userId1);
                 result.ModuleId = Convert.ToInt32(moduleId);
-                result.Status = score >= 8 ? true : false;
+                result.Status = correctAnswers >= 8 ? true : false;
                 learningEnglishContext.Results.Add(result);
                 learningEnglishContext.SaveChanges();
             }
+            double score = ((double)correctAnswers / totalQuestions) * 10;
             ViewBag.score = score;
+            ViewBag.correctAnswers = correctAnswers;
+            ViewBag.totalQuestions = totalQuestions;
             return View();
         }
+
 
         public IActionResult Login()
         {

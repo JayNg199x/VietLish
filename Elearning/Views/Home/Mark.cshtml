@@ -6,14 +6,16 @@
 
 @if (ViewBag.score < 8)
 {
-    <h3>Mark: @ViewBag.score - <b style ="color:red">Not Pass</b></h3>
-
+    <div class="alert alert-danger text-center" role="alert">
+        Your score is <b>@ViewBag.score/10</b>. You did not pass the test.
+    </div>
 }
 @if (ViewBag.score >= 8)
 {
-    <h3>Mark: @ViewBag.score - <b style ="color:green"> Passed</b></h3>
-
+    <div class="alert alert-success text-center" role="alert">
+        Your score is <b>@ViewBag.score/10</b>. You passed the test.
+    </div>
 }
-
-
-<a class="btn btn-info" href="/Home/EnrollLevel">Return home</a>
+<div class="text-center">
+    <a class="btn btn-primary" href="/Home/EnrollLevel">Return Home</a>
+</div>
