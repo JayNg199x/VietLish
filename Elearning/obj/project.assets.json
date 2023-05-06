@@ -82,6 +82,21 @@
           "Microsoft.AspNetCore.App"
         ]
       },
+      "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore/5.0.17": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.17"
+        },
+        "compile": {
+          "lib/net5.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -2480,6 +2495,21 @@
         "lib/net5.0/Microsoft.AspNetCore.Authentication.Google.xml",
         "microsoft.aspnetcore.authentication.google.5.0.17.nupkg.sha512",
         "microsoft.aspnetcore.authentication.google.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore/5.0.17": {
+      "sha512": "GYVBM8d5Db/0Tp5RaW4igIBM2t09rnQRTxzlQnnApA8b5n+AQTZWwdRsHHG+PrTyNVijGnGqNqh8NeYixUryXg==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.diagnostics.entityframeworkcore/5.0.17",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net5.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll",
+        "lib/net5.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.xml",
+        "microsoft.aspnetcore.diagnostics.entityframeworkcore.5.0.17.nupkg.sha512",
+        "microsoft.aspnetcore.diagnostics.entityframeworkcore.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
@@ -8154,6 +8184,7 @@
     "net5.0": [
       "Microsoft.AspNet.Mvc >= 5.2.9",
       "Microsoft.AspNetCore.Authentication.Google >= 5.0.17",
+      "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 5.0.17",
       "Microsoft.EntityFrameworkCore >= 5.0.17",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.17",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.17",
@@ -8214,6 +8245,10 @@
             "version": "[5.2.9, )"
           },
           "Microsoft.AspNetCore.Authentication.Google": {
+            "target": "Package",
+            "version": "[5.0.17, )"
+          },
+          "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
             "target": "Package",
             "version": "[5.0.17, )"
           },

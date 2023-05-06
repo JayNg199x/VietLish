@@ -109,6 +109,10 @@ namespace ELearning.Controllers
 
         public IActionResult EnrollLevel(int? id, int? page)
         {
+            if (id == null)
+            {
+                id = 1;
+            }
             LearningEnglishContext learningEnglishContext = new LearningEnglishContext();
             string? userId = HttpContext.Session.GetString("userId");
             string userId1 = JsonConvert.DeserializeObject<string>(userId);
@@ -275,7 +279,7 @@ namespace ELearning.Controllers
 
             if (available != null)
             {
-                available.Status = score >= 5 ? true : false;
+                available.Status = score >= 8 ? true : false;
                 learningEnglishContext.SaveChanges();
             }
             else

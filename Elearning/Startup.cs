@@ -39,8 +39,8 @@ namespace ELearning
                     options.LoginPath = "/Home/Signingoogle";
                 }).AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
                 {
-                    options.ClientId = "499201243810-eh668rl506v8nd7c515ptfpne21d2ee1.apps.googleusercontent.com";
-                    options.ClientSecret = "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";
+                    options.ClientId = "326766733800-kh90cr7vrocaol4sv7ihonaq608s2jcc.apps.googleusercontent.com";
+                    options.ClientSecret = "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";
                     options.ClaimActions.MapJsonKey("urn:google:picture", "picture", "url");
                 });
         }

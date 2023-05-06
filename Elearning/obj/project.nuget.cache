@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "SoTjH18NHjDkGPxh7Ffrhq4LmVfZE2n1NTsYAztbVPO2vXszIJLDCKmGwzVBPP381tRbnr8boHbuLdF975Im9g==",
+  "dgSpecHash": "9hAvLH72hissdiwDUfCId/6urwSlbpUUGG3yJkA1NyMp0pW30t/g9VzWvi3BmXjsTgdGy6x46k8JZFNtbgSYWA==",
   "success": true,
   "projectFilePath": "C:\\Users\\KN\\source\\repos\\VietLish\\ELearning\\VietLish.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\KN\\.nuget\\packages\\microsoft.aspnet.razor\\3.2.9\\microsoft.aspnet.razor.3.2.9.nupkg.sha512",
     "C:\\Users\\KN\\.nuget\\packages\\microsoft.aspnet.webpages\\3.2.9\\microsoft.aspnet.webpages.3.2.9.nupkg.sha512",
     "C:\\Users\\KN\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\5.0.17\\microsoft.aspnetcore.authentication.google.5.0.17.nupkg.sha512",
+    "C:\\Users\\KN\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\5.0.17\\microsoft.aspnetcore.diagnostics.entityframeworkcore.5.0.17.nupkg.sha512",
     "C:\\Users\\KN\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\KN\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
     "C:\\Users\\KN\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\5.0.0\\microsoft.aspnetcore.razor.language.5.0.0.nupkg.sha512",

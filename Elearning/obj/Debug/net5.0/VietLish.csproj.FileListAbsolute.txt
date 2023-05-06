@@ -5,7 +5,6 @@ C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\VietLish.deps.json
 C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\VietLish.runtimeconfig.json
 C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\VietLish.runtimeconfig.dev.json
 C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\VietLish.dll
-C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\ref\VietLish.dll
 C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\VietLish.pdb
 C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\VietLish.Views.dll
 C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\VietLish.Views.pdb
@@ -128,7 +127,6 @@ C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\runtimes\unix\lib\n
 C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\VietLish.csproj.AssemblyReference.cache
 C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\VietLish.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\VietLish.AssemblyInfoInputs.cache
 C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\VietLish.AssemblyInfo.cs
@@ -137,7 +135,6 @@ C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\VietLish.MvcApplica
 C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\VietLish.RazorAssemblyInfo.cache
 C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\VietLish.RazorAssemblyInfo.cs
 C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\staticwebassets\VietLish.StaticWebAssets.Manifest.cache
-C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\staticwebassets\VietLish.StaticWebAssets.xml
 C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\scopedcss\bundle\VietLish.styles.css
 C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\VietLish.TagHelpers.input.cache
 C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\VietLish.TagHelpers.output.cache
@@ -193,3 +190,7 @@ C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\System.Text.Encodin
 C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\System.Text.Json.dll
 C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\Tavis.UriTemplates.dll
 C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\Razor\Views\Home\SentenceStructure.cshtml.g.cs
+C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
+C:\Users\KN\source\repos\VietLish\ELearning\bin\Debug\net5.0\ref\VietLish.dll
+C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\staticwebassets\VietLish.StaticWebAssets.xml
+C:\Users\KN\source\repos\VietLish\ELearning\obj\Debug\net5.0\VietLish.csproj.AssemblyReference.cache
